@@ -1,0 +1,37 @@
+### Get all images.  Each request **MUST** be delimited by a triple hash
+# This is a comment
+GET http://localhost:3000/api/images
+
+### Get one image by id
+GET http://localhost:3000/api/images/69af1877a4ffe45046720e23
+
+### Rename image (success)
+PATCH http://localhost:3000/api/images/69af1877a4ffe45046720e23/name
+Content-Type: application/json
+
+{ "name": "New image name" }
+
+### Rename image (bad request - missing name)
+PATCH http://localhost:3000/api/images/69af1877a4ffe45046720e23/name
+Content-Type: application/json
+
+{ "title": "Missing name field" }
+
+### Rename image (not found - invalid id)
+PATCH http://localhost:3000/api/images/not-a-valid-id/name
+Content-Type: application/json
+
+{ "name": "Will not work" }
+
+### Rename image (content too large)
+PATCH http://localhost:3000/api/images/69af1877a4ffe45046720e23/name
+Content-Type: application/json
+
+{ "name": "This name is way too longggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" }
+
+### A second example.  Each request **MUST** be delimited by a triple hash
+POST http://localhost:3000/api/test
+Content-Type: application/json # Content-Type header is a must if you're sending JSON
+# Request body separated from headers by newline
+
+{ "a": 1, "b": 2 }
