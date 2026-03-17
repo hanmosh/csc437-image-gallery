@@ -4,9 +4,15 @@ interface ImageNameEditorProps {
     imageId: string;
     initialValue: string;
     onNameUpdated: (newName: string) => void;
+    authToken: string;
 }
 
-export function ImageNameEditor({ imageId, initialValue, onNameUpdated }: ImageNameEditorProps) {
+export function ImageNameEditor({
+    imageId,
+    initialValue,
+    onNameUpdated,
+    authToken,
+}: ImageNameEditorProps) {
     const [isEditingName, setIsEditingName] = useState(false);
     const [nameInput, setNameInput] = useState(initialValue || "");
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,6 +29,7 @@ export function ImageNameEditor({ imageId, initialValue, onNameUpdated }: ImageN
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${authToken}`,
                 },
                 body: JSON.stringify({ name: nameInput }),
             });

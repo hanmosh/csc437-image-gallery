@@ -106,4 +106,13 @@ export class ImageProvider {
         );
         return result.matchedCount;
     }
+
+    async createImage({ src, name, authorId }) {
+        const result = await this.collection.insertOne({
+            src,
+            name,
+            authorId
+        });
+        return result.insertedId;
+    }
 }
